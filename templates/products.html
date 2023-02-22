@@ -16,9 +16,8 @@
 <body>
 
 <header class="navbar navbar-dark bg-dark fixed-top container-fluid d-flex bd-highlight px-5">
-    <div class="navbar-nav flex-row flex-fill bd-highlight">
+    <div class="flex-fill bd-highlight">
         <a class="navbar-brand" href="/">BookWorld</a>
-        <a class="nav-item nav-link" href="products">Productos</a>
     </div>
     <div class="flex-fill bd-highlight">
         <form class="d-flex">
@@ -34,52 +33,6 @@
         </nav>
     </div>
 </header>
-<div class="mt-5">
-    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active ">
-                <a href="https://www.esquire.com/es/actualidad/libros/a38483239/mejores-libros-2022-novelas-recomendadas/"
-                   target="_blank"
-                   title="Mejores libros 2022">
-                    <img src="{% static 'img/bestBooks.jpg' %}" height="600px"
-                         class="d-block w-100" alt="Mejores libros 2022">
-                </a>
-            </div>
-            <div class="carousel-item">
-                <a href="https://www.lecturalia.com/autor/2196/brandon-sanderson" target="_blank"
-                   title="Quien es Brandon Sanderson?">
-                    <img src="{% static 'img/brandon-sanderson.jpg' %}" height="600px"
-                         class="d-block w-100" alt="Quien es Brandon Sanderson?">
-                </a>
-            </div>
-            <div class="carousel-item">
-                <a href="https://www.lecturalia.com/autor/580/laura-gallego-garcia" target="_blank"
-                   title="Quien es Laura Gallego?">
-                    <img src="{% static 'img/lauragallego.jpg' %}" height="600px"
-                         class="d-block w-100" alt="Quien es Laura Gallego?">
-                </a>
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Anterior</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Siguiente</span>
-        </button>
-    </div>
-</div>
 <div class="container mt-5 pt-5">
     {% if books %}
         {% for book in books %}
@@ -99,6 +52,7 @@
             <div class="row mb-3">{% endif %}
         {% if forloop.last %}</div>{% endif %}
         {% endfor %}
+        {% include "pagination.html" %}
     {% else %}
         <div class="alert alert-warning" role="alert">No hay libros disponibles</div>
     {% endif %}
