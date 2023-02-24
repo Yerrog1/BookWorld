@@ -6,7 +6,7 @@ from BookWorld.models import cart_total, Book
 from BookWorld.models.invoice import Invoice
 from BookWorld.models.invoiceItem import InvoiceItem
 from django.core.mail import send_mail
-class UserSession:
+class UserOrder:
     def __init__(self,request, user, cart):
         self.request = request
         self.user = user

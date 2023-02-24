@@ -21,9 +21,10 @@ def registerUser(request):
         else:
             usuario = User.objects.get(dni=form.data.get('dni'))
 
-        userSession = UserSession(request,usuario, Cart(request))
-        created = userSession.saveInvoice()
+        userOrder = UserOrder(request,usuario, Cart(request))
+        created = userOrder.saveInvoice()
         books = Book.objects.all().order_by('title')[:9]
+        userOrder.sendMail()
         Cart(request).clear()
         return render(request, 'index.html', {'books': books, 'created': created})
     else:
