@@ -14,28 +14,34 @@
     <link rel="icon" href="{% static 'img/book.png' %}">
 </head>
 <body>
+
 <header class="navbar navbar-dark bg-dark fixed-top container-fluid d-flex bd-highlight px-5">
-    <div class="flex-fill bd-highlight">
-        <a class="navbar-brand me-0" href="/">BookWorld</a>
+    <div class="navbar-nav flex-row flex-fill bd-highlight">
+        <a class="navbar-brand" href="/">BookWorld</a>
+        <a class="nav-item nav-link" href="/products">Productos</a>
     </div>
     <div class="flex-fill bd-highlight">
         <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                   href="search">
+                   href="/search">
         </form>
     </div>
     <div class="flex-fill bd-highlight">
         <nav class="navbar navbar-expand-lg text-light">
-            <a class="nav-link ms-auto" aria-current="page" href="">
+            <a class="nav-link ms-auto" aria-current="page" href="cart">
                 <img src="../static/img/cart.png" width="30" height="30">
             </a>
-
         </nav>
     </div>
 </header>
+<div class="container mt-5 pt-5">
+    <p>{{ book.title }}</p>
+    <a href="{% url 'add' book.isbn %}" class="btn btn-primary">Agregar al carrito</a>
+</div>
+
 
 <!--------------------------------------------------------------------------------------------------------------------->
-<footer class="footer  py-3 bg-light mt-3">
+<footer class="footer  py-3 bg-light mt-3 ">r
     <div class="container">
         <span class="text-muted">BookWorld © <script>document.write(new Date().getFullYear())</script> </span>
         <span class="text-muted"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Sobre nosotros</a></span>
@@ -49,6 +55,16 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
 
 
 

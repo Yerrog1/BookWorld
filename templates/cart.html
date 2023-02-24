@@ -33,8 +33,47 @@
         </nav>
     </div>
 </header>
-<div class="container mt-5">
-    <button type="submit" class="btn btn-primary mt-3"><a href="/register" class="text-light">Aceptar</a></button>
+<div class="container py-5 mt-5">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="row" colspan="3" class="text-center">CARRITO</th>
+    </tr>
+    <tr>
+      <th scope="col">NOMBRE</th>
+      <th scope="col">PRECIO</th>
+      <th scope="col">CANTIDAD</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% if request.session.cart.items %}
+  {% for key, value in request.session.cart.items %}
+    <tr>
+      <td>{{value.name}}</td>
+      <td>{{value.price}}</td>
+      <td>{{value.acumulated}}
+        <a href="{% url 'Add' value.producto_id %}" class="badge btn btn-dark badge-dark">+</a>
+        <a href="{% url 'Sub' value.producto_id %}" class="badge btn btn-dark badge-dark">-</a>
+      </td>
+    </tr>
+  {% endfor %}
+  {% else %}
+  <tr>
+      <td colspan="3">
+          <div class="alert alert-danger text-center"> Sin Productos </div>
+      </td>
+  </tr>
+  {% endif %}
+    <tr>
+      <th scope="row">Total:</th>
+      <td colspan="2">$ {{total_cart}}</td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+</div>
+<div class="row text-center">
+    <div class="col-6"><a href="#" class="btn btn-success">Guardar</a></div>
 </div>
 
 
