@@ -11,31 +11,25 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet"/>
-    <link rel="icon" href="{% static 'img/icon.png' %}">
-    <link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css">
+    <link rel="icon" href="{% static 'img/book.png' %}">
 </head>
 <body>
-<header class="navbar navbar-dark bg-dark fixed-top container-fluid d-flex bd-highlight px-5 mb-5">
-    <div class="flex-fill bd-highlight">
-        <a class="navbar-brand" href="/">BookWorld</a>
+<header class="navbar navbar-dark bg-dark fixed-top container-fluid d-flex bd-highlight px-5">
+    <div class="navbar-nav flex-row flex-fill bd-highlight">
+        <a class="navbar-brand" href="{% url 'index' %}">BookWorld</a>
+        <a class="nav-item nav-link" href="{% url 'products' %}">Productos</a>
     </div>
     <div class="flex-fill bd-highlight">
         <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                   href="search">
+                   href="#">
         </form>
     </div>
     <div class="flex-fill bd-highlight">
         <nav class="navbar navbar-expand-lg text-light">
-            <a class="nav-link ms-auto" aria-current="page" href="">
+            <a class="nav-link ms-auto" aria-current="page" href="{% url 'cart' %}">
                 <img src="../static/img/cart.png" width="30" height="30">
             </a>
-      </nav>
-  </div>
-</header>
-         
-
-
         </nav>
     </div>
 </header>
@@ -64,7 +58,10 @@
                 <label for="phone" class="form-label txt_negrita">Teléfono</label>
                 <input name="phone" type="text" class="form-control" id="phone" aria-describedby="phoneHelp" required/>
             </div>
-            <button type="submit" class="btn btn-primary">Aceptar</button>
+
+            <div class="col text-center">
+                <button type="submit" class="btn btn-primary">Aceptar</button>
+            </div>
             {% csrf_token %}
         </form>
     </div>
