@@ -11,18 +11,36 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet"/>
-    <link rel="icon" href="{% static 'img/book.png' %}">
+    <link rel="icon" href="{% static 'img/icon.png' %}">
 </head>
+
+    <div class="modal" id="myModal" {% if error %}style="display:block"{% endif %}>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Error!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Los datos introducidos son incorrectos</p>
+            </div>
+            <div class="modal-footer col text-center">
+                <a href="{% url 'register' %}" class="btn btn-primary">Cerrar</a>
+            </div>
+        </div>
+    </div>
+</div>
 <body>
 <header class="navbar navbar-dark bg-dark fixed-top container-fluid d-flex bd-highlight px-5">
     <div class="navbar-nav flex-row flex-fill bd-highlight">
-        <a class="navbar-brand" href="{% url 'index' %}">BookWorld</a>
-        <a class="nav-item nav-link" href="{% url 'products' %}">Productos</a>
+
+        <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'img/icon.png' %}" width="30" height="30"
+                                                              class="d-inline-block align-top" alt=""> BookWorld</a>
+        <a class="nav-item nav-link" href="{% url 'search_books' %}">Productos</a>
     </div>
     <div class="flex-fill bd-highlight">
-        <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                   href="#">
+        <form class="d-flex" action="{% url 'search_books' %}" method="get">
+            <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" name="q">
         </form>
     </div>
     <div class="flex-fill bd-highlight">
@@ -33,17 +51,20 @@
         </nav>
     </div>
 </header>
-<div class="container py-3 my-3">
-    <div class="col-md-6">
+<div class="container py-3 my-3 d-flex justify-content-center align-items-center">
+    <div class="col-md-6 mx-auto">
         <h4 class="mb-4 mx-auto">Registro</h4>
         <form method="post">
             <div class="mb-3">
                 <label for="dni" class="form-label txt_negrita">DNI</label>
-                <input name="dni" type="text" class="form-control" id="dni" aria-describedby="dniHelp" required/>
+                <input name="dni" type="text" class="form-control" id="dni"
+                       pattern="^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$" aria-describedby="dniHelp" required/>
+                <small id="dniHelp" class="form-text text-muted">Introduce tu DNI con letra (sin espacios ni
+                    guiones)</small>
             </div>
             <div class="mb-3">
                 <label for="name" class="form-label txt_negrita">Nombre completo</label>
-                <input name="name" type="text" class="form-control" id="name    " aria-describedby="nameHelp" required/>
+                <input name="name" type="text" class="form-control" id="name" aria-describedby="nameHelp" required/>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label txt_negrita">Email</label>
@@ -58,7 +79,6 @@
                 <label for="phone" class="form-label txt_negrita">Teléfono</label>
                 <input name="phone" type="text" class="form-control" id="phone" aria-describedby="phoneHelp" required/>
             </div>
-
             <div class="col text-center">
                 <button type="submit" class="btn btn-primary">Aceptar</button>
             </div>

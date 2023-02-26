@@ -3,23 +3,23 @@
         <ul class="pagination justify-content-center">
             {% if books.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" href="?page=1">&Lt;</a>
+                    <a class="page-link" href="?page=1{% if query %}&q={{ query }}{% endif %}">&Lt;</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ books.previous_page_number }}">&LT;</a>
+                    <a class="page-link" href="?page={{ books.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">&LT;</a>
                 </li>
             {% endif %}
             {% for page in pages %}
                 <li class="page-item {% if current_page == page %}active{% endif %}">
-                    <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                    <a class="page-link" href="?page={{ page }}{% if query %}&q={{ query }}{% endif %}">{{ page }}</a>
                 </li>
             {% endfor %}
             {% if books.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ books.next_page_number }}">&GT;</a>
+                    <a class="page-link" href="?page={{ books.next_page_number }}{% if query %}&q={{ query }}{% endif %}">&GT;</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ books.paginator.num_pages }}">&Gt;</a>
+                    <a class="page-link" href="?page={{ books.paginator.num_pages }}{% if query %}&q={{ query }}{% endif %}">&Gt;</a>
                 </li>
             {% endif %}
         </ul>

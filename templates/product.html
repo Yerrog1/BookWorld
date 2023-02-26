@@ -11,19 +11,20 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet"/>
-    <link rel="icon" href="{% static 'img/book.png' %}">
+    <link rel="icon" href="{% static 'img/icon.png' %}">
 </head>
 <body>
 
 <header class="navbar navbar-dark bg-dark fixed-top container-fluid d-flex bd-highlight px-5">
     <div class="navbar-nav flex-row flex-fill bd-highlight">
-        <a class="navbar-brand" href="{% url 'index' %}">BookWorld</a>
-        <a class="nav-item nav-link" href="{% url 'products' %}">Productos</a>
+
+        <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'img/icon.png' %}" width="30" height="30"
+                                                              class="d-inline-block align-top" alt=""> BookWorld</a>
+        <a class="nav-item nav-link" href="{% url 'search_books' %}">Productos</a>
     </div>
     <div class="flex-fill bd-highlight">
-        <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                   href="#">
+        <form class="d-flex" action="{% url 'search_books' %}" method="get">
+            <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" name="q">
         </form>
     </div>
     <div class="flex-fill bd-highlight">
@@ -35,13 +36,29 @@
     </div>
 </header>
 <div class="container mt-5 pt-5">
-    <p>{{ book.title }}</p>
-    <a href="{% url 'addProducts' book.isbn %}" class="btn btn-primary">Agregar al carrito</a>
+    <div class="row">
+        <div class="col-md-6">
+            <img {% if book.image %}src="{{ book.image.url }}"{% else %}src="{% static 'img/book.png' %}"{% endif %}
+                 alt="{{ book.title }}" width="80%" height="80%">
+        </div>
+        <div class="col-md-6">
+            <h2>{{ book.title }}</h2>
+            <p>{{ book.description }}</p>
+            <p><strong>Autor: </strong>{{ book.author }}</p>
+            <p><strong>Genero: </strong>{{ book.genre }}</p>
+
+            <p><strong>ISBN: </strong> {{ book.isbn }}</p>
+            <p><strong>Precio: </strong>{{ book.price }} €</p>
+            <div class="col text-center">
+                <a href="{% url 'addProducts' book.isbn %}" class="btn btn-primary text-center">Agregar al carrito</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 <!--------------------------------------------------------------------------------------------------------------------->
-<footer class="footer  py-3 bg-light mt-3 ">r
+<footer class="footer  py-3 bg-light mt-3 fixed-bottom">
     <div class="container">
         <span class="text-muted">BookWorld © <script>document.write(new Date().getFullYear())</script> </span>
         <span class="text-muted"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Sobre nosotros</a></span>

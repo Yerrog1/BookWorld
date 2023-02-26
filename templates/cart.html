@@ -11,18 +11,19 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet"/>
-    <link rel="icon" href="{% static 'img/book.png' %}">
+    <link rel="icon" href="{% static 'img/icon.png' %}">
 </head>
 <body>
 <header class="navbar navbar-dark bg-dark fixed-top container-fluid d-flex bd-highlight px-5">
     <div class="navbar-nav flex-row flex-fill bd-highlight">
-        <a class="navbar-brand" href="{% url 'index' %}">BookWorld</a>
-        <a class="nav-item nav-link" href="{% url 'products' %}">Productos</a>
+
+        <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'img/icon.png' %}" width="30" height="30"
+                                                              class="d-inline-block align-top" alt=""> BookWorld</a>
+        <a class="nav-item nav-link" href="{% url 'search_books' %}">Productos</a>
     </div>
     <div class="flex-fill bd-highlight">
-        <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                   href="#">
+        <form class="d-flex" action="{% url 'search_books' %}" method="get">
+            <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" name="q">
         </form>
     </div>
     <div class="flex-fill bd-highlight">
@@ -84,11 +85,12 @@
 
 
 <!--------------------------------------------------------------------------------------------------------------------->
-<footer class="footer  py-3 bg-light mt-3 fixed-bottom">
-    <div class="container">
-        <span class="text-muted">BookWorld © <script>document.write(new Date().getFullYear())</script> </span>
-        <span class="text-muted"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Sobre nosotros</a></span>
-    </div>
+
+<footer class="footer py-3 bg-light mt-3 {% if request.session.cart.items|length < 13 %}fixed-bottom{% endif %}">
+  <div class="container">
+    <span class="text-muted">BookWorld © <script>document.write(new Date().getFullYear())</script> </span>
+    <span class="text-muted"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Sobre nosotros</a></span>
+  </div>
 </footer>
 
 <!-- Archivo JS Bootstrap 5 -->

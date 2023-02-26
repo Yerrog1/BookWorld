@@ -11,20 +11,21 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet"/>
-    <link rel="icon" href="{% static 'img/book.png' %}">
+    <link rel="icon" href="{% static 'img/icon.png' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
 </head>
 <body>
 
 <header class="navbar navbar-dark bg-dark fixed-top container-fluid d-flex bd-highlight px-5">
     <div class="navbar-nav flex-row flex-fill bd-highlight">
-        <a class="navbar-brand" href="{% url 'index' %}">BookWorld</a>
-        <a class="nav-item nav-link" href="{% url 'products' %}">Productos</a>
+
+        <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'img/icon.png' %}" width="30" height="30"
+                                                              class="d-inline-block align-top" alt=""> BookWorld</a>
+        <a class="nav-item nav-link" href="{% url 'search_books' %}">Productos</a>
     </div>
     <div class="flex-fill bd-highlight">
-        <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                   href="#">
+        <form class="d-flex" action="{% url 'search_books' %}" method="get">
+            <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" name="q">
         </form>
     </div>
     <div class="flex-fill bd-highlight">
@@ -38,21 +39,26 @@
 
 
 <div class="modal" id="myModal" {% if created %}style="display:block"{% endif %}>
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Felicidades!</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Tu pedido se ha creado. Revisa tu correo para ver la factura</p>
-      </div>
-      <div class="modal-footer">
-        <a href="{% url 'index' %}" class="btn btn-primary">Cerrar</a>
-      </div>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Felicidades!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Tu pedido se ha creado. Revisa tu correo para ver la factura</p>
+                {% if change %}<p>Has proporcionado datos diferentes a la ultima vez que compraste en nuestra tienda.
+                    Por lo que han sido modificados</p>{% endif %}
+                <p>Para cualquier problema con su pedido contactenos en el telefono +34 698159159</p>
+            </div>
+            <div class="modal-footer col text-center">
+                <a href="{% url 'index' %}" class="btn btn-primary">Cerrar</a>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
+
+
 <div class="mt-5">
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -108,7 +114,7 @@
             <div class="card box-shadow">
                 {% if book.image %}
                     <img src="{{ book.image.url }}" class="card-img-top" alt="..."
-                         style="height: 225px; width: 100%; display: block;">
+                         style="height: 225px; width: 100%; display: block;object-fit: cover;">
                 {% else %}
                     <img src="{% static 'img/book.png' %}" class="card-img-top" alt="..."
                          style="height: 225px; width: 100%; display: block;">
