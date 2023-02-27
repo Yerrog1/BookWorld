@@ -22,6 +22,12 @@ def registerUser(request):
                 usuario = form.save(commit=False)
                 change = False
                 usuario.save()
+                userOrder = UserOrder(request, usuario, Cart(request))
+                created = userOrder.saveInvoice()
+                books = Book.objects.all().order_by('title')[:9]
+                userOrder.sendMail()
+                Cart(request).clear()
+                return render(request, 'index.html', {'books': books, 'created': created, 'change': change})
             else:
                 change = False
                 if (user.validateDni(form.data.get('dni'))
@@ -92,7 +98,7 @@ def add_to_cart_in_products(request, product_isbn):
     cart = Cart(request)
     product = Book.objects.get(isbn=product_isbn)
     cart.add(product)
-    return redirect("products")
+    return redirect("search_books")
 
 
 def remove_from_cart(request, product_isbn):
