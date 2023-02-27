@@ -58,13 +58,13 @@ class UserOrder:
         email.send()
 
     def header(self, canvas_obj):
-        logo = 'BookWorld/static/img/image2.png'
+        '''logo = 'BookWorld/static/img/image2.png'''
         canvas_obj.setFont('Helvetica-Bold', size=14)
         canvas_obj.line(50, 800, 525, 800)
         canvas_obj.drawString(55, 755, 'BookWorld')
         canvas_obj.drawString(240, 700, 'Listado de compras')
         canvas_obj.line(50, 695, 525, 695)
-        canvas_obj.drawImage(logo, 450, 700, width=100, height=80)
+        '''canvas_obj.drawImage(logo, 450, 700, width=100, height=80)'''
         canvas_obj.setFont('Helvetica', size=9)
 
     def foot(self, canvas_obj):
