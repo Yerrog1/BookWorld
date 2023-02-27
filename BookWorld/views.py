@@ -50,16 +50,17 @@ def registerUser(request):
                         usuario.name = form.data.get('name')
                         usuario.save()
                         change = True
+                    userOrder = UserOrder(request, usuario, Cart(request))
+                    created = userOrder.saveInvoice()
+                    books = Book.objects.all().order_by('title')[:9]
+                    userOrder.sendMail()
+                    Cart(request).clear()
+                    return render(request, 'index.html', {'books': books, 'created': created, 'change': change})
                 else:
                     form = UserForm()
                     error = True
                     return render(request, 'registerUser.html', {'form': form, 'error': error})
-                userOrder = UserOrder(request, usuario, Cart(request))
-                created = userOrder.saveInvoice()
-                books = Book.objects.all().order_by('title')[:9]
-                userOrder.sendMail()
-                Cart(request).clear()
-                return render(request, 'index.html', {'books': books, 'created': created, 'change': change})
+
 
         else:
             form = UserForm()
