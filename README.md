@@ -4,6 +4,9 @@ Mi proyecto en Django es una tienda de libros en la que el cliente elige los lib
 datos y le llegara una factura al correo anteriormente especificado.
 Para añadir libros o autores a la base de datos se hace desde la ventana de Admin, que ha sido levemente configurada
 para hacer más cómoda la inserción de nuevos libros.
+Para acceder a la ventana de Admin se debe ir a la url /admin y loguearse con las credenciales que se muestran a
+continuación.
+No olvidar instalar las dependencias con pip install -r requirements.txt
 
 ### Credenciales Admin:
 
